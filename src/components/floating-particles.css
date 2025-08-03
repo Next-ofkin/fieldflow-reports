@@ -1,0 +1,45 @@
+.stars, .twinkling, .rainbow-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300%;
+  height: 300%;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+}
+
+.stars {
+  background: url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/images/stars.png') repeat;
+  animation: moveStars 200s linear infinite;
+  opacity: 0.3;
+}
+
+.twinkling {
+  background: url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/images/twinkling.png') repeat;
+  animation: moveTwinkling 100s linear infinite;
+  opacity: 0.2;
+}
+
+.rainbow-glow {
+  background: linear-gradient(120deg, #ff00cc, #3333ff, #00ffcc, #ffff00, #ff3300);
+  background-size: 1000% 1000%;
+  animation: rainbow 30s ease infinite;
+  mix-blend-mode: screen;
+  opacity: 0.1;
+}
+
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to { background-position: -10000px 5000px; }
+}
+
+@keyframes moveTwinkling {
+  from { background-position: 0 0; }
+  to { background-position: 10000px 5000px; }
+}
+
+@keyframes rainbow {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
