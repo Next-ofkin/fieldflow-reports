@@ -9,8 +9,13 @@ import { generatePDF } from "@/components/PDFReport";
 import { Report } from "@/types/report";
 import { useReports } from "@/hooks/useReports";
 import { useAuth } from "@/hooks/useAuth";
-import { FileText, History, Loader2, LogOut } from "lucide-react";
+import { FileText, History, Loader2, LogOut, Brain, BarChart3, TrendingUp, MessageSquare } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ProfessionalAIAnalytics } from "@/components/ProfessionalAIAnalytics";
+import { EnhancedDataVisualization } from "@/components/EnhancedDataVisualization";
+import { PredictiveAnalytics } from "@/components/PredictiveAnalytics";
+import { AIChatInterface } from "@/components/AIChatInterface";
+import { MobileResponsiveWrapper } from "@/components/MobileResponsiveWrapper";
 
 const Index = () => {
   const { user, loading: authLoading, signOut, session } = useAuth();
@@ -138,16 +143,36 @@ const Index = () => {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto mb-6 sm:mb-8">
+          <TabsList className="grid w-full grid-cols-6 max-w-4xl mx-auto mb-6 sm:mb-8">
             <TabsTrigger value="create" className="flex items-center gap-2">
               <FileText className="h-4 w-4" />
-              <span className="hidden sm:inline">Create Report</span>
+              <span className="hidden sm:inline">Create</span>
               <span className="sm:hidden">Create</span>
             </TabsTrigger>
             <TabsTrigger value="history" className="flex items-center gap-2">
               <History className="h-4 w-4" />
-              <span className="hidden sm:inline">Reports History</span>
+              <span className="hidden sm:inline">History</span>
               <span className="sm:hidden">History</span>
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="flex items-center gap-2">
+              <Brain className="h-4 w-4" />
+              <span className="hidden sm:inline">Analytics</span>
+              <span className="sm:hidden">AI</span>
+            </TabsTrigger>
+            <TabsTrigger value="visualization" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              <span className="hidden sm:inline">Charts</span>
+              <span className="sm:hidden">Charts</span>
+            </TabsTrigger>
+            <TabsTrigger value="predictions" className="flex items-center gap-2">
+              <TrendingUp className="h-4 w-4" />
+              <span className="hidden sm:inline">Predict</span>
+              <span className="sm:hidden">Predict</span>
+            </TabsTrigger>
+            <TabsTrigger value="chat" className="flex items-center gap-2">
+              <MessageSquare className="h-4 w-4" />
+              <span className="hidden sm:inline">Chat</span>
+              <span className="sm:hidden">Chat</span>
             </TabsTrigger>
           </TabsList>
 
@@ -166,6 +191,30 @@ const Index = () => {
               onEditReport={handleEditReport}
               onDeleteReport={handleDeleteReport}
             />
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-6">
+            <MobileResponsiveWrapper>
+              <ProfessionalAIAnalytics reports={reports} />
+            </MobileResponsiveWrapper>
+          </TabsContent>
+
+          <TabsContent value="visualization" className="space-y-6">
+            <MobileResponsiveWrapper>
+              <EnhancedDataVisualization reports={reports} />
+            </MobileResponsiveWrapper>
+          </TabsContent>
+
+          <TabsContent value="predictions" className="space-y-6">
+            <MobileResponsiveWrapper>
+              <PredictiveAnalytics reports={reports} />
+            </MobileResponsiveWrapper>
+          </TabsContent>
+
+          <TabsContent value="chat" className="space-y-6">
+            <MobileResponsiveWrapper>
+              <AIChatInterface reports={reports} />
+            </MobileResponsiveWrapper>
           </TabsContent>
         </Tabs>
       </div>
