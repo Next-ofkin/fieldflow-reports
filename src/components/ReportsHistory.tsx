@@ -155,7 +155,11 @@ export const ReportsHistory = ({ reports, onViewReport, onEditReport, onDeleteRe
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => onDeleteReport(report.id)}
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to delete this report?")) {
+                          onDeleteReport(report.id);
+                        }
+                      }}
                       className="flex items-center justify-center gap-2 h-9 text-destructive hover:text-destructive hover:bg-destructive/10"
                     >
                       <Trash2 className="h-4 w-4" />
