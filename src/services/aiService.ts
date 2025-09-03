@@ -127,11 +127,27 @@ class AIService {
   }
 
   private extractPredictions(content: string): any {
-    const predictions = content.match(/predictions?[:\s]+(.*?)(?=\n|$)/gi);
-    return {
+    const match = content.match(/predictions?[:\s]+(.*?)(?=\n|$)/i);
+    const defaults = {
       costTrend: 'stable',
       efficiencyImprovement: '5-10%',
-      savingsPotential: '15-20%'
+      potentialSavings: '15-20%'
+    };
+
+    if (!match) {
+      return defaults;
+    }
+
+    const text = match[1];
+
+    const costTrendMatch = text.match(/cost(?:\s+trend)?[:\s]+([^;,.]+)/i);
+    const efficiencyMatch = text.match(/efficiency(?:\s+improvement)?[:\s]+([^;,.]+)/i);
+    const savingsMatch = text.match(/(?:potential\s+)?savings?[:\s]+([^;,.]+)/i);
+
+    return {
+      costTrend: costTrendMatch ? costTrendMatch[1].trim() : defaults.costTrend,
+      efficiencyImprovement: efficiencyMatch ? efficiencyMatch[1].trim() : defaults.efficiencyImprovement,
+      potentialSavings: savingsMatch ? savingsMatch[1].trim() : defaults.potentialSavings
     };
   }
 
@@ -150,7 +166,7 @@ class AIService {
       predictions: {
         costTrend: 'stable',
         efficiencyImprovement: '5-10%',
-        savingsPotential: '15-20%'
+        potentialSavings: '15-20%'
       },
       confidence: 0.75,
       model: 'local-fallback'
