@@ -223,7 +223,7 @@ export const AIChatInterface = ({ reports }: AIChatInterfaceProps) => {
       ],
       predictions: {
         efficiencyImprovement: '10-15%',
-        savingsPotential: '20-25%'
+        potentialSavings: '20-25%'
       },
       confidence: 0.80,
       model: 'local-analysis'
